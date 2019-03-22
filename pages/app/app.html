@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页面</title>
+</head>
+<body>
+<button id="home">Home</button>
+<button id="images">Images</button>
+<button id="video">Video</button>
+
+
+<div style="width: 800px;height:500px" id="routerView">
+
+</div>
+<script src="./router.js"></script>
+<script>
+    var home = document.getElementById("home");
+    var images = document.getElementById("images");
+    var video = document.getElementById("video");
+    var config = {
+        routeId: 'routerView',
+        redirect:"/home",
+        routes:[
+            {
+                path:"/home",
+                templateUrl:"/layFile/pages/home/home.html"
+            },
+            {
+                path:"/images",
+                templateUrl:"/layFile/pages/images/images.html"
+            },
+            {
+                path:"/video/:id",
+                templateUrl:"/layFile/pages/video/video.html"
+            }
+        ]
+
+    };
+
+    router.init(config);
+    router.beforeEach(function () {
+        console.log("路由跳转前执行");
+    });
+    router.afterEach(function () {
+        console.log("路由跳转后执行");
+    });
+    home.onclick = function (ev) {
+
+        linkTo("/home");
+    };
+    images.onclick = function (ev) {
+
+        linkTo("/images");
+    };
+    video.onclick = function (ev) {
+
+        linkTo("/video",{id:1101});
+    };
+
+
+</script>
+</body>
+</html>
